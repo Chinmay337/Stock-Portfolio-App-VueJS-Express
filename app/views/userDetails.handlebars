@@ -1,0 +1,128 @@
+<div id="app">
+  <main v-if="haveValidUser">
+    <h1>
+      Stock Portfolio of &#123;&#123; user.firstName &#125;&#125; &#123;&#123;
+      user.lastName &#125;&#125;</h1>
+
+    <div class="stockinfo">
+      <h3 style="text-align: center;">Balance</h3>
+      <ul>
+        <li style="margin:0.5rem;"><strong>Cash</strong>: &#123;&#123;
+          formatAmount(user.balance.cash) &#125;&#125;</li>
+        <li style="margin:0.5rem;"><strong>Stock</strong>: &#123;&#123;
+          formatAmount(user.balance.stock) &#125;&#125;</li>
+        <li style="margin:0.5rem;"><strong>Total net worth</strong>:
+          &#123;&#123; formatAmount(user.balance.cash+user.balance.stock)
+          &#125;&#125;</li>
+      </ul>
+      <div class="stockinfobottom">
+        <strong><label for="deposit">Add Cash balance :</label></strong>
+        <input
+          style="width:50%;margin-top:0.5rem;"
+          id="deposit"
+          v-model="depositAmount"
+        />
+        <button
+          style="margin-bottom:1rem;"
+          class="adduserbutton"
+          v-on:click="depositIntoAccount"
+          :disabled="validAmount==''"
+        >Deposit</button>
+      </div>
+    </div>
+
+    <hr />
+    <h2>Current Portfolio</h2>
+
+    <table border="1px">
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Symbol</th>
+          <th>Quantity</th>
+          <th>Purchased On</th>
+          <th>Purchase Price</th>
+          <th>Current Price</th>
+          <th>Profit / Loss</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody v-if="user.portfolio && user.portfolio.length>0">
+        <tr v-for="pos in user.portfolio">
+          <td>&#123;&#123; pos.name &#125;&#125;</td>
+          <td>&#123;&#123; pos.symbol &#125;&#125;</td>
+          <td>&#123;&#123; pos.quantity &#125;&#125;</td>
+          <td>&#123;&#123; formatDate(pos.purchaseDate) &#125;&#125;</td>
+          <td>&#123;&#123; formatAmount(pos.purchasePrice) &#125;&#125;</td>
+          <td>&#123;&#123; formatAmount(pos.currentPrice) &#125;&#125;</td>
+          <td>&#123;&#123; formatAmount(pos.quantity * (pos.currentPrice -
+            pos.purchasePrice)) &#125;&#125;</td>
+          <td><button v-on:click="sellStock(pos.id)">Sell</button></td>
+        </tr>
+      </tbody>
+      <tbody v-if="!user.portfolio || user.portfolio.length==0">
+        <tr><td colspan="8">No stocks in portfolio</td></tr>
+      </tbody>
+    </table>
+
+    <hr />
+    <div class="stockinfobottom">
+ <button
+      class="adduserbutton"
+      v-if="!enableBuyForm"
+      v-on:click="enableBuyForm=true;"
+    >Buy new stock</button>
+
+    <div class="stockinfo" v-if="enableBuyForm">
+      <h3>Buy new stock</h3>
+
+      <label for="symbol">Stock Symbol</label>
+      <input v-model="stockSymbol" />
+      <div class="stocksymbols">
+      <button
+        v-on:click="checkSymbol"
+        :disabled="stockSymbol==''"
+      >Check</button>
+      <button v-on:click="enableBuyForm=false;">Cancel</button>
+</div>
+      <div v-if="haveStockInfo">
+        <br />
+        <hr />
+        <strong>Symbol</strong>: &#123;&#123; stockDetail.symbol &#125;&#125;<br
+        />
+        <strong>Company Name</strong>: &#123;&#123; stockDetail.name
+        &#125;&#125;<br />
+        <strong>Current Price</strong>: &#123;&#123;
+        formatAmount(stockDetail.price) &#125;&#125;<br />
+        <strong>Daily price range</strong>: &#123;&#123;
+        formatAmount(stockDetail.dailyLow) &#125;&#125; - &#123;&#123;
+        formatAmount(stockDetail.dailyHigh) &#125;&#125;<br />
+        <strong>Volume</strong>: &#123;&#123; stockDetail.volume &#125;&#125;<br
+        />
+        <hr />
+        <label for="symbol">Quantity to buy</label>
+        <input v-model="buyQuantity" />
+        <<div class="stocksymbols2">
+        <button style="justify-self:center;align-self:center;" v-if="validQuantity!=''" v-on:click="buyThis">Buy</button>
+        </div>
+      </div>
+
+    </div>
+
+    <hr />
+    <p class="box" v-if="message !=''">&#123;&#123; message &#125;&#125;</p>
+    <p class="box error" v-if="error !=''">&#123;&#123; error &#125;&#125;</p>
+    <button class="adduserbutton" v-on:click="reset">Reset</button>
+    <button class="adduserbutton" v-on:click="logMeOff">Log Off</button>
+  </main>
+
+  <main v-if="!haveValidUser">
+    <p class="box error" v-if="error !=''"><h1>&#123;&#123; error &#125;&#125;</h1></p>
+  </main>
+
+</div>
+
+    </div>
+   
+<script> var uid = "{{id}}";</script>
+<script src="/js/userdetails.js"></script>

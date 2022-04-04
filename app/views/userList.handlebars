@@ -1,0 +1,79 @@
+<main>
+  <h2>A Simple Admin page</h2>
+
+  <hr />
+
+  <div id="app">
+
+    <h3>Current users</h3>
+    <table border="1px"><thead>
+        <tr><th>First Name</th><th>Last Name</th><th>Cash Balance</th><th
+          >Operations</th></tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users">
+          <td>&#123;&#123; user.firstName &#125;&#125;</td>
+          <td>&#123;&#123; user.lastName &#125;&#125;</td>
+          <td>&#123;&#123; formatAmount(user.balance) &#125;&#125;</td>
+          <td>
+            <button
+              class="loginbtn"
+              :disabled="mode!=''"
+              v-on:click="goToUser(user.id)"
+            >Log In</button>&nbsp;|&nbsp;
+            <button
+              class="delbtn"
+              :disabled="mode!=''"
+              v-on:click="startEditUser(user.id)"
+            >Edit</button>&nbsp;
+            <button
+              class="editbtn"
+              :disabled="mode!=''"
+              v-on:click="deleteUser(user.id)"
+            >Delete</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <button
+      class="adduserbutton"
+      v-if="mode==''"
+      v-on:click="startAddUser()"
+    >Add new user</button>
+
+    <div v-if="mode!=''">
+      <hr />
+      <h3>&#123;&#123; operationTitle &#125;&#125;</h3>
+
+      <label for="fname">First Name</label>:
+      <input id="fname" v-model="firstName" /><br />
+      <label for="lname">Last Name</label>:&nbsp;<input
+        id="lname"
+        v-model="lastName"
+      /><br />
+      <label for="bal">Initial Balance</label>:&nbsp;<input
+        id="bal"
+        v-model="balance"
+      /><br />
+      <button
+        v-if="mode=='ADD'"
+        v-on:click="addUser"
+        :disabled="!formIsValid"
+      >Add user</button>
+      <button
+        v-if="mode=='EDIT'"
+        v-on:click="editUser"
+        :disabled="!formIsValid"
+      >Update user</button>
+    </div>
+
+    <hr />
+    <p class="box" v-if="message !=''">&#123;&#123; message &#125;&#125;</p>
+    <p class="box error" v-if="error !=''">&#123;&#123; error &#125;&#125;</p>
+    <button class="bigbutton" v-on:click="reset">Reset</button>
+
+  </div>
+</main>
+
+<script src="/js/userlist.js"></script>

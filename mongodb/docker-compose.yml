@@ -1,0 +1,53 @@
+#==================================================================================
+#
+# Starting: docker-compose up -d --build
+#
+# Stopping docker-compose down
+#
+#==================================================================================
+
+version: '3.7'
+
+services:
+    mongodb:
+        image: mongo:5.0
+        container_name: mongodb
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=mongorootuser
+            - MONGO_INITDB_ROOT_PASSWORD=mongoSecretPass
+        ports:
+            -  27017:27017
+        volumes:
+            - mongodb-volume:/data/db
+
+#    appserver:
+#        build:
+#            context: ./server
+#        ports:
+#            - 3000:3000
+
+volumes:
+    mongodb-volume:
+
+
+#
+# Mongo Shell
+#
+# docker run -it  --network="mongodb_default" mongo:5.0 mongosh "mongodb://mongorootuser:mongoSecretPass@mongodb:27017/admin" 
+#
+# Listing Databases:
+# ------------------
+#
+#db.adminCommand( { listDatabases: 1 } );
+#
+# Creating database:
+# -----------------
+#   No need to create database . Just use it and create collections. IT will automatically be created.
+#
+#   use cs602db ;
+#
+# Create app user:
+# ----------------
+#
+#    db.createUser({user:"cs602_user",pwd:"cs602_secret", roles:[{role:"readWrite", db:"cs602db"}] })
+#

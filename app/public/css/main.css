@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:500");
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  padding: 0 20px;
+  background: rgb(255, 128, 128);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 128, 128, 1) 0%,
+    rgba(191, 103, 109, 1) 47%,
+    rgba(246, 118, 162, 1) 100%
+  );
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+}
+
+p,
+ul {
+  text-align: left;
+  padding: 0 20px;
+}
+
+.box {
+  border: solid 1px;
+  border-radius: 5px;
+  background: rgb(2, 110, 17);
+  padding: 6px;
+}
+
+.error {
+  background-color: #fd7070;
+}
+
+.stockinfo {
+  border: solid 1px;
+  border-radius: 5px;
+  border-color: #bbb;
+  background: rgb(17, 0, 0, 0.5);
+  padding: 6px;
+  text-align: left;
+  width: 30%;
+  justify-self: center;
+  align-self: center;
+}
+
+table {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+@media (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+  table {
+    min-width: 100%;
+    background-color: white;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    padding: 0 20px;
+    color: rgb(158, 34, 34);
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    text-align: center;
+    margin: 0 auto;
+    /* max-width: 1100px; */
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+table td,
+th {
+  padding: 0.5rem;
+}
+
+.loginbtn {
+  -webkit-appearance: none;
+  background: -webkit-gradient(to right, #0ab443 0%, #088b1c 50%, #07b363 100%);
+  background: linear-gradient(
+    to right,
+    #06993f 0%,
+    #023f28 50%,
+    #05d332ee 100%
+  );
+  background-size: 500%;
+}
+
+.delbtn {
+  -webkit-appearance: none;
+  background: -webkit-gradient(to right, #b80505 0%, #d30621 50%, #f05208 100%);
+  background: linear-gradient(
+    to right,
+    #f13404 0%,
+    #ee8207 50%,
+    #f1072673 100%
+  );
+  background-size: 500%;
+}
+
+.editbtn {
+  -webkit-appearance: none;
+  background: -webkit-gradient(to right, #b80505 0%, #d30621 50%, #f05208 100%);
+  background: linear-gradient(
+    to right,
+    #f13404 0%,
+    #ee8207 50%,
+    #f1072673 100%
+  );
+  background-size: 500%;
+}
+
+button {
+  -webkit-appearance: none;
+  background: -webkit-gradient(to right, #b80505 0%, #d30621 50%, #f05208 100%);
+  background: linear-gradient(
+    to right,
+    #f13404 0%,
+    #ee8207 50%,
+    #f1072673 100%
+  );
+  background-size: 500%;
+  border: none;
+  /* border-radius: 5rem; */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  color: #fff;
+  cursor: pointer;
+  font: 1.5em Raleway, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 2rem;
+  letter-spacing: 0.05em;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 4rem;
+}
+
+button:hover {
+  animation-name: gradient;
+  -webkit-animation-name: gradient;
+  animation-duration: 2s;
+  -webkit-animation-duration: s;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+button {
+  font-size: 1rem;
+}
+
+.bigbutton {
+  height: 3rem;
+}
+
+.adduserbutton {
+  width: 10rem;
+  margin-top: 1rem;
+}
+
+.stockinfobottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stocksymbols {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.stocksymbols button {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5%;
+}
+
+.stocksymbols2 {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
